@@ -69,6 +69,7 @@ public class Robot extends TimedRobot {
         // constructed yet. Thus, their requires() statements may grab null
         // pointers. Bad news. Don't move it.
         driveTrain.resetEncoders();
+        driveTrain.initTalons();
         timer = new Timer();
         oi = new OI();
         
@@ -110,7 +111,7 @@ public class Robot extends TimedRobot {
     @Override
     public void autonomousInit() {
     	driveTrain.resetEncoders();
-    	Timer.delay(0.1);
+    	Timer.delay(0.05);
         autonomousCommand = chooser.getSelected();
         // schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();

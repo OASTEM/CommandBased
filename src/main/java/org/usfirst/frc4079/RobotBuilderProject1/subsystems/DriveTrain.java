@@ -132,7 +132,18 @@ public class DriveTrain extends Subsystem {
     	navX1.reset();
     	
     }
-    
+	
+	public synchronized void initTalons(){
+		leftMaster.configClosedloopRamp(Constants.kClosedLoopRampRate, Constants.kTimeoutMs);
+		leftMaster.configOpenloopRamp(Constants.kOpenLoopRampRate, Constants.kTimeoutMs);
+		rightMaster.configClosedloopRamp(Constants.kClosedLoopRampRate, Constants.kTimeoutMs);
+		rightMaster.configOpenloopRamp(Constants.kOpenLoopRampRate, Constants.kTimeoutMs);
+		leftSlave.configClosedloopRamp(Constants.kClosedLoopRampRate, Constants.kTimeoutMs);
+		leftSlave.configOpenloopRamp(Constants.kOpenLoopRampRate, Constants.kTimeoutMs);
+		rightSlave.configClosedloopRamp(Constants.kClosedLoopRampRate, Constants.kTimeoutMs);
+		rightSlave.configOpenloopRamp(Constants.kOpenLoopRampRate, Constants.kTimeoutMs);
+
+	}
     public double getLeftDistance() {
     	return getInchesFromNativeUnits(leftMaster.getSelectedSensorPosition(0));
     }

@@ -19,17 +19,20 @@ public class Constants {
     public static int kDriveStraightCruiseVelocity = 400;
     public static int kDriveStraightAcceleration = 2000;
 
-    public static double kDriveTurnKp = 1.4;
+    public static double kDriveTurnKp = 2.0;
     public static double kDriveTurnKi = 0.0;
     public static double kDriveTurnKd = 0.0;
-    public static double kDriveTurnKf = 2.0;
+    public static double kDriveTurnKf = 0.0;
     public static int kDriveTurnIZone = 100;
     public static double kDriveTurnPeakOutput = 1;
-    public static int kDriveTurnCruiseVelocity = 400;
-    public static int kDriveTurnAcceleration = 2000;
+    public static int kDriveTurnCruiseVelocity = 500;
+    public static int kDriveTurnAcceleration = 2500;
 
     public static int kTimeoutMs = 10;
 
     public static int kStatus_13_TimeMs = 10; // Default 160
     public static int kStatus_10_TimeMs = 10; // Default 160
+
+    public static double kClosedLoopRampRate = 0; // seconds from zero to full
+    public static double kOpenLoopRampRate = 1; // seconds from zero to full
 }
