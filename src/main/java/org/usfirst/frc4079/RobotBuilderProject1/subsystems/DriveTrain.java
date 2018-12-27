@@ -134,6 +134,7 @@ public class DriveTrain extends Subsystem {
     }
 	
 	public synchronized void initTalons(){
+		// Set General Parameters
 		leftMaster.configClosedloopRamp(Constants.kClosedLoopRampRate, Constants.kTimeoutMs);
 		leftMaster.configOpenloopRamp(Constants.kOpenLoopRampRate, Constants.kTimeoutMs);
 		rightMaster.configClosedloopRamp(Constants.kClosedLoopRampRate, Constants.kTimeoutMs);
@@ -142,6 +143,65 @@ public class DriveTrain extends Subsystem {
 		leftSlave.configOpenloopRamp(Constants.kOpenLoopRampRate, Constants.kTimeoutMs);
 		rightSlave.configClosedloopRamp(Constants.kClosedLoopRampRate, Constants.kTimeoutMs);
 		rightSlave.configOpenloopRamp(Constants.kOpenLoopRampRate, Constants.kTimeoutMs);
+
+		leftMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, Constants.kStatus_13_TimeMs, Constants.kTimeoutMs);
+		leftMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, Constants.kStatus_10_TimeMs, Constants.kTimeoutMs);
+		
+		rightMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, Constants.kStatus_13_TimeMs, Constants.kTimeoutMs);
+		rightMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, Constants.kStatus_10_TimeMs, Constants.kTimeoutMs);
+
+		leftMaster.configPeakOutputForward(1, Constants.kTimeoutMs);
+		leftMaster.configPeakOutputReverse(-1, Constants.kTimeoutMs);
+		leftMaster.configNominalOutputForward(0, Constants.kTimeoutMs);
+		leftMaster.configNominalOutputReverse(0, Constants.kTimeoutMs);
+
+		rightMaster.configPeakOutputForward(1, Constants.kTimeoutMs);
+		rightMaster.configPeakOutputReverse(-1, Constants.kTimeoutMs);
+		rightMaster.configNominalOutputForward(0, Constants.kTimeoutMs);
+		rightMaster.configNominalOutputReverse(0, Constants.kTimeoutMs);
+		// Set Parameters For Driving Straight
+		rightMaster.config_kP(Constants.kSlotStraight, Constants.kDriveStraightKp, Constants.kTimeoutMs);
+		rightMaster.config_kI(Constants.kSlotStraight, Constants.kDriveStraightKi, Constants.kTimeoutMs);
+		rightMaster.config_kD(Constants.kSlotStraight, Constants.kDriveStraightKd, Constants.kTimeoutMs);
+		rightMaster.config_kF(Constants.kSlotStraight, Constants.kDriveStraightKf, Constants.kTimeoutMs);
+		rightMaster.config_IntegralZone(Constants.kSlotStraight, Constants.kDriveStraightIZone, Constants.kTimeoutMs);
+		
+		rightMaster.setIntegralAccumulator(0, 0, Constants.kTimeoutMs);
+		
+		rightMaster.configClosedLoopPeakOutput(Constants.kSlotStraight, Constants.kDriveStraightPeakOutput, Constants.kTimeoutMs);
+		
+		rightMaster.configMotionCruiseVelocity(Constants.kDriveStraightCruiseVelocity, Constants.kTimeoutMs);
+		rightMaster.configMotionAcceleration(Constants.kDriveStraightAcceleration, Constants.kTimeoutMs);
+		
+		leftMaster.config_kP(Constants.kSlotStraight, Constants.kDriveStraightKp, Constants.kTimeoutMs);
+		leftMaster.config_kI(Constants.kSlotStraight, Constants.kDriveStraightKi, Constants.kTimeoutMs);
+		leftMaster.config_kD(Constants.kSlotStraight, Constants.kDriveStraightKd, Constants.kTimeoutMs);
+		leftMaster.config_kF(Constants.kSlotStraight, Constants.kDriveStraightKf, Constants.kTimeoutMs);
+		leftMaster.config_IntegralZone(Constants.kSlotStraight, Constants.kDriveStraightIZone, Constants.kTimeoutMs);
+		
+		leftMaster.setIntegralAccumulator(0, 0, Constants.kTimeoutMs);
+
+		leftMaster.configClosedLoopPeakOutput(Constants.kSlotStraight, Constants.kDriveStraightPeakOutput, Constants.kTimeoutMs);
+
+		leftMaster.configMotionCruiseVelocity(Constants.kDriveStraightCruiseVelocity, Constants.kTimeoutMs);
+		leftMaster.configMotionAcceleration(Constants.kDriveStraightAcceleration, Constants.kTimeoutMs);
+
+        // Set Parameters For Turn
+		rightMaster.config_kP(Constants.kSlotTurn, Constants.kDriveTurnKp, Constants.kTimeoutMs);
+ 		rightMaster.config_kI(Constants.kSlotTurn, Constants.kDriveTurnKi, Constants.kTimeoutMs);
+ 		rightMaster.config_kD(Constants.kSlotTurn, Constants.kDriveTurnKd, Constants.kTimeoutMs);
+ 		rightMaster.config_kF(Constants.kSlotTurn, Constants.kDriveTurnKf, Constants.kTimeoutMs);
+ 		rightMaster.config_IntegralZone(Constants.kSlotTurn, Constants.kDriveTurnIZone, Constants.kTimeoutMs);
+		
+		rightMaster.configClosedLoopPeakOutput(Constants.kSlotTurn, Constants.kDriveTurnPeakOutput, Constants.kTimeoutMs);
+
+ 		leftMaster.config_kP(Constants.kSlotTurn, Constants.kDriveTurnKp, Constants.kTimeoutMs);
+ 		leftMaster.config_kI(Constants.kSlotTurn, Constants.kDriveTurnKi, Constants.kTimeoutMs);
+ 		leftMaster.config_kD(Constants.kSlotTurn, Constants.kDriveTurnKd, Constants.kTimeoutMs);
+ 		leftMaster.config_kF(Constants.kSlotTurn, Constants.kDriveTurnKf, Constants.kTimeoutMs);
+ 		leftMaster.config_IntegralZone(Constants.kSlotTurn, Constants.kDriveTurnIZone, Constants.kTimeoutMs);
+		 
+		leftMaster.configClosedLoopPeakOutput(Constants.kSlotTurn, Constants.kDriveTurnPeakOutput, Constants.kTimeoutMs);
 
 	}
     public double getLeftDistance() {
@@ -157,83 +217,19 @@ public class DriveTrain extends Subsystem {
     }
     
     public void configureForDrive() {
-		rightMaster.config_kP(0, Constants.kDriveStraightKp, Constants.kTimeoutMs);
-		rightMaster.config_kI(0, Constants.kDriveStraightKi, Constants.kTimeoutMs);
-		rightMaster.config_kD(0, Constants.kDriveStraightKd, Constants.kTimeoutMs);
-		rightMaster.config_kF(0, Constants.kDriveStraightKf, Constants.kTimeoutMs);
-		rightMaster.config_IntegralZone(0, Constants.kDriveStraightIZone, Constants.kTimeoutMs);
-		
+		rightMaster.selectProfileSlot(Constants.kSlotStraight, 0);
+		leftMaster.selectProfileSlot(Constants.kSlotStraight, 0);
+
 		rightMaster.setIntegralAccumulator(0, 0, Constants.kTimeoutMs);
-		
-		rightMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, Constants.kStatus_13_TimeMs, Constants.kTimeoutMs);
-		rightMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, Constants.kStatus_10_TimeMs, Constants.kTimeoutMs);
-		
-		rightMaster.configNominalOutputForward(0, Constants.kTimeoutMs);
-		rightMaster.configNominalOutputReverse(0, Constants.kTimeoutMs);
-		rightMaster.configPeakOutputForward(Constants.kDriveStraightPeakOutput, Constants.kTimeoutMs);
-		rightMaster.configPeakOutputReverse(-Constants.kDriveStraightPeakOutput, Constants.kTimeoutMs);
-		
-		rightMaster.configMotionCruiseVelocity(Constants.kDriveStraightCruiseVelocity, Constants.kTimeoutMs);
-		rightMaster.configMotionAcceleration(Constants.kDriveStraightAcceleration, Constants.kTimeoutMs);
-		
-		leftMaster.config_kP(0, Constants.kDriveStraightKp, Constants.kTimeoutMs);
-		leftMaster.config_kI(0, Constants.kDriveStraightKi, Constants.kTimeoutMs);
-		leftMaster.config_kD(0, Constants.kDriveStraightKd, Constants.kTimeoutMs);
-		leftMaster.config_kF(0, Constants.kDriveStraightKf, Constants.kTimeoutMs);
-		leftMaster.config_IntegralZone(0, Constants.kDriveStraightIZone, Constants.kTimeoutMs);
-		
 		leftMaster.setIntegralAccumulator(0, 0, Constants.kTimeoutMs);
-
-		leftMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, Constants.kStatus_13_TimeMs, Constants.kTimeoutMs);
-		leftMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, Constants.kStatus_10_TimeMs, Constants.kTimeoutMs);
-		
-		leftMaster.configNominalOutputForward(0, Constants.kTimeoutMs);
-		leftMaster.configNominalOutputReverse(0, Constants.kTimeoutMs);
-		leftMaster.configPeakOutputForward(Constants.kDriveStraightPeakOutput, Constants.kTimeoutMs);
-		leftMaster.configPeakOutputReverse(-Constants.kDriveStraightPeakOutput, Constants.kTimeoutMs);
-    	
-		leftMaster.configMotionCruiseVelocity(Constants.kDriveStraightCruiseVelocity, Constants.kTimeoutMs);
-		leftMaster.configMotionAcceleration(Constants.kDriveStraightAcceleration, Constants.kTimeoutMs);
-
     }
     public void configureForTurn() {
- 		rightMaster.config_kP(0, Constants.kDriveTurnKp, Constants.kTimeoutMs);
- 		rightMaster.config_kI(0, Constants.kDriveTurnKi, Constants.kTimeoutMs);
- 		rightMaster.config_kD(0, Constants.kDriveTurnKd, Constants.kTimeoutMs);
- 		rightMaster.config_kF(0, Constants.kDriveTurnKf, Constants.kTimeoutMs);
- 		rightMaster.config_IntegralZone(0, Constants.kDriveTurnIZone, Constants.kTimeoutMs);
- 		
+		rightMaster.selectProfileSlot(Constants.kSlotTurn, 0);
+		leftMaster.selectProfileSlot(Constants.kSlotTurn, 0);
+ 	
  		rightMaster.setIntegralAccumulator(0, 0, Constants.kTimeoutMs);
- 		
-		rightMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, Constants.kStatus_13_TimeMs, Constants.kTimeoutMs);
-		rightMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, Constants.kStatus_10_TimeMs, Constants.kTimeoutMs);
-
- 		rightMaster.configNominalOutputForward(0, Constants.kTimeoutMs);
-		rightMaster.configNominalOutputReverse(0, Constants.kTimeoutMs);
-		rightMaster.configPeakOutputForward(Constants.kDriveTurnPeakOutput, Constants.kTimeoutMs);
-		rightMaster.configPeakOutputReverse(-Constants.kDriveTurnPeakOutput, Constants.kTimeoutMs);
-		rightMaster.configMotionCruiseVelocity(Constants.kDriveTurnCruiseVelocity, Constants.kTimeoutMs);
-		rightMaster.configMotionAcceleration(Constants.kDriveTurnAcceleration, Constants.kTimeoutMs);
-		
- 		leftMaster.config_kP(0, Constants.kDriveTurnKp, Constants.kTimeoutMs);
- 		leftMaster.config_kI(0, Constants.kDriveTurnKi, Constants.kTimeoutMs);
- 		leftMaster.config_kD(0, Constants.kDriveTurnKd, Constants.kTimeoutMs);
- 		leftMaster.config_kF(0, Constants.kDriveTurnKf, Constants.kTimeoutMs);
- 		leftMaster.config_IntegralZone(0, Constants.kDriveTurnIZone, Constants.kTimeoutMs);
-     	
  		leftMaster.setIntegralAccumulator(0, 0, Constants.kTimeoutMs);
- 
-		leftMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, Constants.kStatus_13_TimeMs, Constants.kTimeoutMs);
-		leftMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, Constants.kStatus_10_TimeMs, Constants.kTimeoutMs);
-
- 		leftMaster.configNominalOutputForward(0, Constants.kTimeoutMs);
-		leftMaster.configNominalOutputReverse(0, Constants.kTimeoutMs);
-		leftMaster.configPeakOutputForward(Constants.kDriveTurnPeakOutput, Constants.kTimeoutMs);
-		leftMaster.configPeakOutputReverse(-Constants.kDriveTurnPeakOutput, Constants.kTimeoutMs);
 	
-		leftMaster.configMotionCruiseVelocity(Constants.kDriveTurnCruiseVelocity, Constants.kTimeoutMs);
-		leftMaster.configMotionAcceleration(Constants.kDriveTurnAcceleration, Constants.kTimeoutMs);
-
      }
     public void outputToSmartDashboard() {
     	SmartDashboard.putNumber("left position", getLeftDistance());
