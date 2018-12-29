@@ -16,7 +16,7 @@ public class middle2right extends CommandGroup {
             addSequential(new DriveDistance(54, 2.5));
             //Simultaneously lift the elevator while turning back towards switch
             addParallel(new RaiseElevator(.5, 2));
-            addSequential(new TurnByAngle(-90,2));
+            addSequential(new TurnByAngle(-90,3));
             //drive forward and drop cube
             addParallel(new EjectCube(.5, 3));
             addSequential(new DriveDistance(10, 2));
