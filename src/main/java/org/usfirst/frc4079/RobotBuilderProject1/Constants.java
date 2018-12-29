@@ -37,4 +37,7 @@ public class Constants {
 
     public static double kClosedLoopRampRate = 0; // seconds from zero to full
     public static double kOpenLoopRampRate = 1; // seconds from zero to full
+
+    public static final int kBaseTrajPeriodMs = 0;
+    public static final double kNeutralDeadband = 0.01;
 }
