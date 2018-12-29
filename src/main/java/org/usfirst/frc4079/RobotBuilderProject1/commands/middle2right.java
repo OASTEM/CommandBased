@@ -24,14 +24,14 @@ public class middle2right extends CommandGroup {
             */
 
             //alternative method that may be quicker
-            //robot distance to switch is approx 110 inches and middle to center of swtich is around 54 inches
+            //robot distance to switch is approx 110 inches and middle to center of swtich plate is around 54 inches
             //robot lowers wrist while simultaneously slightly moving off of wall
             addParallel(new RaiseWrist(-0.3, .3));
             addSequential(new DriveDistance(5, 1));
             //robot rotates to face the right switch
             addSequential(new TurnByAngle(26, 2));
             //robot drives distance towards switch
-            addSequential(new DriveDistance(120, 5));
+            addSequential(new DriveDistance(120, 3));
             //robot turns back to face switch while lifting elevator
             addParallel(new RaiseElevator(.5, 2));
             addSequential(new TurnByAngle(-26,2));
