@@ -19,7 +19,7 @@ public class middle2right extends CommandGroup {
             addSequential(new TurnByAngle(-90,2));
             //drive forward and drop cube
             addParallel(new EjectCube(.5, 3));
-            addSequential(new DriveDistance(10, 3));
+            addSequential(new DriveDistance(10, 2));
 
        }
 
