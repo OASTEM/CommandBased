@@ -3,10 +3,10 @@ package org.usfirst.frc4079.RobotBuilderProject1.commands;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import org.usfirst.frc4079.RobotBuilderProject1.subsystems.*;
 
-public class middle2right extends CommandGroup {
+public class Middle2Right extends CommandGroup {
        //robot length is approx 33 inches, distance from switch to wall is around 140 inches so travel distance is arouund 110 inches
        
-       public middle2right(){
+       public Middle2Right(){
             /*
             //robot will travel 100 inches (5 sec) forward while simultaneously lowering intake wrist (0.3 sec)
             addParallel(new RaiseWrist(-0.3, .3));
