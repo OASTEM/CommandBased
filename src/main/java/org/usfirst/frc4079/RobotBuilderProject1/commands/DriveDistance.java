@@ -58,7 +58,16 @@ public class DriveDistance extends Command {
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-        return isTimedOut();
+        double CurrentPosLeft = Robot.driveTrain.getLeftDistance();
+        double CurrentPosRight = Robot.driveTrain.getRightDistance();
+        //checks if the current position is equal to the distance goal
+        boolean leftGoalReached = CurrentPosLeft >= leftPosition + distance;
+        boolean RightGoalReached = CurrentPosRight >= rightPosition - distance;
+        if (leftGoalReached && RightGoalReached) {
+            return true;
+        }
+        return false;
+        //return isTimedOut();
     }
 
     // Called once after isFinished returns true
