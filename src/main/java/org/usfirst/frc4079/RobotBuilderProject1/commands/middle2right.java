@@ -1,7 +1,6 @@
 package org.usfirst.frc4079.RobotBuilderProject1.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import org.usfirst.frc4079.RobotBuilderProject1.subsystems.*;
 
 public class Middle2Right extends CommandGroup {
        //robot length is approx 33 inches, distance from switch to wall is around 140 inches so travel distance is arouund 110 inches
