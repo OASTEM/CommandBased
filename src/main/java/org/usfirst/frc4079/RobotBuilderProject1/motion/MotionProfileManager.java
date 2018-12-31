@@ -165,7 +165,7 @@ public class MotionProfileManager {
 				 * something is wrong. Talon is not present, unplugged, breaker
 				 * tripped
 				 */
-				Instrumentation.OnNoProgress();
+				// Instrumentation.OnNoProgress();
 			} else {
 				--_loopTimeout;
 			}
@@ -245,7 +245,7 @@ public class MotionProfileManager {
 			_vel = _talon.getActiveTrajectoryVelocity();
 
 			/* printfs and/or logging */
-			Instrumentation.process(_status, _pos, _vel, _heading);
+		//	Instrumentation.process(_status, _pos, _vel, _heading);
 		}
 	}
 	/**
@@ -280,7 +280,7 @@ public class MotionProfileManager {
 		/* did we get an underrun condition since last time we checked ? */
 		if (_status.hasUnderrun) {
 			/* better log it so we know about it */
-			Instrumentation.OnUnderrun();
+		//	Instrumentation.OnUnderrun();
 			/*
 			 * clear the error. This flag does not auto clear, this way 
 			 * we never miss logging it.

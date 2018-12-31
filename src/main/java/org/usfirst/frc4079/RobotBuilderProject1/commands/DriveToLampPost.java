@@ -33,8 +33,8 @@ public class DriveToLampPost extends CommandGroup {
 			leftPoints[i][0] = getNativeUnitsFromInches(12*Left.Points[i][0]); // ft to NU
 			leftPoints[i][1] = getNativeUnitsFromInches(12*Left.Points[i][1]/10); // ft/sec to NU/100 msec
 			leftPoints[i][2] = Left.Points[i][2];
-			rightPoints[i][0] = getNativeUnitsFromInches(-12*Right.Points[i][0]); // ft to NU
-			rightPoints[i][1] = getNativeUnitsFromInches(-12*Right.Points[i][1]/10); // ft/sec to NU/100 msec
+			rightPoints[i][0] = getNativeUnitsFromInches(-12*Left.Points[i][0]); // ft to NU
+			rightPoints[i][1] = getNativeUnitsFromInches(-12*Left.Points[i][1]/10); // ft/sec to NU/100 msec
 			rightPoints[i][2] = Right.Points[i][2];
 		}
 
