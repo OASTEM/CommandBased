@@ -11,7 +11,12 @@
 
 package org.usfirst.frc4079.RobotBuilderProject1.commands;
 import edu.wpi.first.wpilibj.command.Command;
+
+import com.ctre.phoenix.motion.MotionProfileStatus;
+
 import org.usfirst.frc4079.RobotBuilderProject1.Robot;
+import org.usfirst.frc4079.RobotBuilderProject1.RobotMap;
+import org.usfirst.frc4079.RobotBuilderProject1.motion.MotionProfileManager;
 
 /**
  *
@@ -55,19 +60,20 @@ public class DriveDistance extends Command {
     	
     }
 
+
     // Make this return true when this Command no longer needs to run execute()
+    MotionProfileStatus LeftMasterStatus = new MotionProfileStatus();
+    MotionProfileStatus RightMasterStatus = new MotionProfileStatus();
+
     @Override
     protected boolean isFinished() {
-        double CurrentPosLeft = Robot.driveTrain.getLeftDistance();
-        double CurrentPosRight = Robot.driveTrain.getRightDistance();
-        //checks if the current position is equal to the distance goal
-        boolean leftGoalReached = CurrentPosLeft >= leftPosition + distance;
-        boolean RightGoalReached = CurrentPosRight >= rightPosition - distance;
-        if (leftGoalReached && RightGoalReached) {
+       RobotMap.driveTrainLeftMaster.getMotionProfileStatus(LeftMasterStatus);
+       RobotMap.driveTrainRightMaster.getMotionProfileStatus(RightMasterStatus);
+       if(LeftMasterStatus.activePointValid && LeftMasterStatus.isLast && RightMasterStatus.activePointValid && RightMasterStatus.isLast){
             return true;
-        }
-        return false;
-        //return isTimedOut();
+       }
+       return false;
+       //return isTimedOut();
     }
 
     // Called once after isFinished returns true
