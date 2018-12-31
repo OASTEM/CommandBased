@@ -69,7 +69,8 @@ public class DriveDistance extends Command {
     protected boolean isFinished() {
        RobotMap.driveTrainLeftMaster.getMotionProfileStatus(LeftMasterStatus);
        RobotMap.driveTrainRightMaster.getMotionProfileStatus(RightMasterStatus);
-       if(LeftMasterStatus.activePointValid && LeftMasterStatus.isLast && RightMasterStatus.activePointValid && RightMasterStatus.isLast){
+        boolean PathComplete = LeftMasterStatus.activePointValid && LeftMasterStatus.isLast && RightMasterStatus.activePointValid && RightMasterStatus.isLast;
+        if (PathComplete || isTimedOut()) {
             return true;
        }
        return false;
