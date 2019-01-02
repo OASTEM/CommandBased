@@ -62,19 +62,9 @@ public class DriveDistance extends Command {
 
 
     // Make this return true when this Command no longer needs to run execute()
-    MotionProfileStatus LeftMasterStatus = new MotionProfileStatus();
-    MotionProfileStatus RightMasterStatus = new MotionProfileStatus();
-
     @Override
     protected boolean isFinished() {
-       RobotMap.driveTrainLeftMaster.getMotionProfileStatus(LeftMasterStatus);
-       RobotMap.driveTrainRightMaster.getMotionProfileStatus(RightMasterStatus);
-        boolean PathComplete = LeftMasterStatus.activePointValid && LeftMasterStatus.isLast && RightMasterStatus.activePointValid && RightMasterStatus.isLast;
-        if (PathComplete || isTimedOut()) {
-            return true;
-       }
-       return false;
-       //return isTimedOut();
+       return isTimedOut();
     }
 
     // Called once after isFinished returns true

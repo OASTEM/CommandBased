@@ -65,6 +65,7 @@ public class DriveDistance2 extends Command {
     MotionProfileStatus LeftMasterStatus = new MotionProfileStatus();
     MotionProfileStatus RightMasterStatus = new MotionProfileStatus();
 
+    //As of right now I'm unsure if this method will work
     @Override
     protected boolean isFinished() {
        RobotMap.driveTrainLeftMaster.getMotionProfileStatus(LeftMasterStatus);
