@@ -40,4 +40,8 @@ public class Constants {
 
     public static final int kBaseTrajPeriodMs = 0;
     public static final double kNeutralDeadband = 0.01;
+
+    //Used in DriveDistance1
+    public static final int MaxSamples = 10;
+    public static final double MaxAllowedError = 2.0;
 }

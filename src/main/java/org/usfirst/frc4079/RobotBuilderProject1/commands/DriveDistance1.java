@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 import com.ctre.phoenix.motion.MotionProfileStatus;
 
+import org.usfirst.frc4079.RobotBuilderProject1.Constants;
 import org.usfirst.frc4079.RobotBuilderProject1.Robot;
 import org.usfirst.frc4079.RobotBuilderProject1.RobotMap;
 import org.usfirst.frc4079.RobotBuilderProject1.motion.MotionProfileManager;
@@ -62,14 +63,14 @@ public class DriveDistance1 extends Command {
     protected void execute() {
         double CurrentPosLeft = Robot.driveTrain.getLeftDistance(); //Gets current distances
         double CurrentPosRight = Robot.driveTrain.getRightDistance();
-        double CurrentLeftError = leftPosition+distance-CurrentPosLeft; //Calculates current error
+        double CurrentLeftError = Math.abs(leftPosition+distance-CurrentPosLeft); //Calculates current error
         double CurrentRightError = Math.abs(rightPosition-distance-CurrentPosRight);
         
-        if(LeftErrors.size() < 10){
-        LeftErrors.add(CurrentLeftError); //Adds current Error to list
-        RightErrors.add(CurrentRightError);
+        if(LeftErrors.size() < Constants.MaxSamples){
+            LeftErrors.add(CurrentLeftError); //Adds current Error to list
+            RightErrors.add(CurrentRightError);
         }
-        else if(LeftErrors.size() == 10){
+        else if(LeftErrors.size() == Constants.MaxSamples){
             LeftErrors.remove(0); //Removes the first value in both array lists
             RightErrors.remove(0);
             LeftErrors.add(CurrentLeftError); //Adds current error to lists
@@ -96,8 +97,8 @@ public class DriveDistance1 extends Command {
         double LeftErrorAvg = LeftSum/LeftErrors.size();
         double RightErrorAvg = RightSum/RightErrors.size();
         
-        //if error is less than 2 inches or timed out, returns true
-        if( (LeftErrorAvg <= 2 && RightErrorAvg <= 2) || isTimedOut() ){
+        //if error is less than or equal to Constants.MaxAllowedError inches or timed out, returns true
+        if( (LeftErrorAvg <= Constants.MaxAllowedError && RightErrorAvg <= Constants.MaxAllowedError) || isTimedOut() ){
             return true;
         }
         return false;
