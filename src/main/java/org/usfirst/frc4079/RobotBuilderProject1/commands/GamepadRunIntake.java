@@ -30,7 +30,9 @@ public class GamepadRunIntake extends Command {
         Robot.intake.run(0.4);
     } else if(Robot.oi.gamePad.getLeftBumper()) {
         Robot.intake.run(-0.3);
-    }   
+    } else {
+      Robot.intake.run(0);
+    }  
   }
 
   // Make this return true when this Command no longer needs to run execute()
