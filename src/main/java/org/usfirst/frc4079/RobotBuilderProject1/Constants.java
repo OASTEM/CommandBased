@@ -43,4 +43,6 @@ public class Constants {
 
     public static double kWristMoveUp = 0.5;
     public static double kWristMoveDown = -0.5;
+
+    public static final int kSampleSize = 10;
 }
