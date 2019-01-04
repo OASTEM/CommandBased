@@ -7,6 +7,7 @@
 
 package org.usfirst.frc4079.RobotBuilderProject1.commands;
 
+import org.usfirst.frc4079.RobotBuilderProject1.Constants;
 import org.usfirst.frc4079.RobotBuilderProject1.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -27,10 +28,10 @@ public class GamepadRunWrist extends Command {
   @Override
   protected void execute() {
     if(Robot.oi.gamePad.getYButton()){
-      Robot.wrist.run(0.5);
+      Robot.wrist.run(Constants.kWristMoveUp);
     }
     else if(Robot.oi.gamePad.getAButton()){
-      Robot.wrist.run(-0.5);
+      Robot.wrist.run(Constants.kWristMoveDown);
     }
     else{
       Robot.wrist.stop();
