@@ -32,6 +32,9 @@ public class GamepadRunWrist extends Command {
     else if(Robot.oi.gamePad.getAButton()){
       Robot.wrist.run(-0.5);
     }
+    else{
+      Robot.wrist.stop();
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -50,5 +53,6 @@ public class GamepadRunWrist extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+      end();
   }
 }
