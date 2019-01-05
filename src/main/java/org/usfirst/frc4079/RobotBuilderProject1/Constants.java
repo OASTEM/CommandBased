@@ -40,4 +40,7 @@ public class Constants {
 
     public static final int kBaseTrajPeriodMs = 0;
     public static final double kNeutralDeadband = 0.01;
+
+    public static double kIntakeSpeed = 0.4;
+    public static double kOuttakeSpeed = -0.3;
 }

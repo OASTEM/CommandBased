@@ -11,6 +11,8 @@ import org.usfirst.frc4079.RobotBuilderProject1.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
+import org.usfirst.frc4079.RobotBuilderProject1.Constants;
+
 public class GamepadRunIntake extends Command {
   public GamepadRunIntake() {
     // Use requires() here to declare subsystem dependencies
@@ -26,13 +28,13 @@ public class GamepadRunIntake extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(Robot.oi.gamePad.getRightBumper()) {
-        Robot.intake.run(0.4);
-    } else if(Robot.oi.gamePad.getLeftBumper()) {
-        Robot.intake.run(-0.3);
+    if (Robot.oi.gamePad.getRightBumper()) {
+      Robot.intake.run(Constants.kIntakeSpeed);
+    } else if (Robot.oi.gamePad.getLeftBumper()) {
+      Robot.intake.run(Constants.kOuttakeSpeed);
     } else {
       Robot.intake.run(0);
-    }  
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -51,6 +53,6 @@ public class GamepadRunIntake extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-      end();
+    end();
   }
 }
